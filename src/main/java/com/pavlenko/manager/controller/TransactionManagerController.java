@@ -49,7 +49,7 @@ public class TransactionManagerController {
         return new ResponseEntity<List<Long>>(list, HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/sum/{transaction_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/sum/{transaction_id}", method = RequestMethod.GET)
     public ResponseEntity<String> getTransactionsSum(@PathVariable("transaction_id") Long transactionId) {
         double sum;
         try {
@@ -58,7 +58,7 @@ public class TransactionManagerController {
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<String>("{\"sum\"," + sum + "}", HttpStatus.OK);
+        return new ResponseEntity<String>(String.format("{\"sum\",%s}", sum), HttpStatus.OK);
     }
 
 
