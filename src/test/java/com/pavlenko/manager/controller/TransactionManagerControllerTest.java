@@ -17,6 +17,7 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * RESTful unit tests
@@ -131,7 +132,8 @@ public class TransactionManagerControllerTest {
                 .statusCode(HttpStatus.OK.value())
                 .extract().as(List.class);
 
-        assertThat(resultList, containsInAnyOrder(1, 2));
+        assertTrue(resultList.contains(1));
+        assertTrue(resultList.contains(2));
     }
 
     @Test
