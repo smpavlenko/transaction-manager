@@ -13,12 +13,13 @@ import java.util.List;
 public interface TransactionService {
 
     /**
-     * Stores transaction by id
+     * Stores transaction by id<br/>
+     * Replaces old transaction with the same id if it exists
      *
      * @param transactionId transaction id
      * @param transaction   transaction object
      */
-    void createTransaction(long transactionId, Transaction transaction);
+    void createOrReplaceTransaction(long transactionId, Transaction transaction);
 
     /**
      * Gets transaction by transaction id

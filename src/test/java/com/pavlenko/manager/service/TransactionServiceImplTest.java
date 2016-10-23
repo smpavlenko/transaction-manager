@@ -27,17 +27,17 @@ public class TransactionServiceImplTest {
     public void setUp() {
         transactionService = new TransactionServiceImpl();
 
-        transactionService.createTransaction(1L, createTransaction("Type1", 1.001, 0));
-        transactionService.createTransaction(2L, createTransaction("Type1", 1.002, 0));
-        transactionService.createTransaction(3L, createTransaction("Type2", 1.003, 1));
-        transactionService.createTransaction(4L, createTransaction("Type3", 1.004, 3));
+        transactionService.createOrReplaceTransaction(1L, createTransaction("Type1", 1.001, 0));
+        transactionService.createOrReplaceTransaction(2L, createTransaction("Type1", 1.002, 0));
+        transactionService.createOrReplaceTransaction(3L, createTransaction("Type2", 1.003, 1));
+        transactionService.createOrReplaceTransaction(4L, createTransaction("Type3", 1.004, 3));
     }
 
     @Test
     public void testCreateTransactionParentNotFound() throws Exception {
         expectedException.expect(IllegalArgumentException.class);
         expectedException.expectMessage("No parent transaction found with id=100");
-        transactionService.createTransaction(5L, createTransaction("Type2", 1.003, 100L));
+        transactionService.createOrReplaceTransaction(5L, createTransaction("Type2", 1.003, 100L));
     }
 
     @Test

@@ -8,21 +8,21 @@ Project is compilable with Java 1.7 or later. The result war file is deployable 
 
 ### The api spec looks like the following:
 * `PUT /transactionservice/transaction/$transaction_id`
-- Body: { "amount":double,"type":string,"parent_id":long }
-- Has O(1) best case complexity (when input transaction has no parent it)
-- Has O(n) worst case complexity (when input and all stored transactions are related to each other)
+-- Body: { "amount":double,"type":string,"parent_id":long }
+-- Has O(1) best case complexity (when input transaction has no parent it)
+-- Has O(n) worst case complexity (when input and all stored transactions are related to each other)
 
 * `GET /transactionservice/transaction/$transaction_id`
-- Returns: { "amount":double,"type":string,"parent_id":long }
-- Has O(1) complexity
+-- Returns: { "amount":double,"type":string,"parent_id":long }
+-- Has O(1) complexity
 
 * `GET /transactionservice/types/$type`
-- Returns: [ long, long, .... ]
-- Has O(n) complexity
+-- Returns: [ long, long, .... ]
+-- Has O(n) complexity
 
 * `GET /transactionservice/sum/$transaction_id`
-- Returns: { "sum", double }
-- Has O(1) complexity
+-- Returns: { "sum": double }
+-- Has O(1) complexity
 
 
 ### Examples

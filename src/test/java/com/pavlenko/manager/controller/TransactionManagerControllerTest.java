@@ -1,5 +1,6 @@
 package com.pavlenko.manager.controller;
 
+import com.pavlenko.manager.model.TotalAmount;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -138,24 +139,27 @@ public class TransactionManagerControllerTest {
 
     @Test
     public void testGetTransactionSumById() throws Exception {
-        given()
+        TotalAmount totalResult = given()
                 .spec(spec)
                 .when()
                 .get("/transactionservice/sum/2")
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .body(equalTo("{\"sum\",1002.0}"));
+                .extract().as(TotalAmount.class);
+
+        assertThat(totalResult.getSum(), equalTo(1002.0));
     }
 
     @Test
     public void testGetTransactionSumByIdWithChildren() throws Exception {
-        given()
+        TotalAmount totalResult = given()
                 .spec(spec)
                 .when()
                 .get("/transactionservice/sum/1")
                 .then()
                 .statusCode(HttpStatus.OK.value())
-                .body(equalTo("{\"sum\",3008.0}"));
+                .extract().as(TotalAmount.class);
+        assertThat(totalResult.getSum(), equalTo(3008.0));
     }
 
     @Test

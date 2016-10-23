@@ -16,7 +16,7 @@ public class TransactionServiceImpl implements TransactionService {
     private Map<Long, Double> sumAmountMap = new HashMap<>();
 
     @Override
-    public void createTransaction(long transactionId, Transaction transaction) {
+    public void createOrReplaceTransaction(long transactionId, Transaction transaction) {
         if (transaction.getParentId() != 0 && !transactionMap.containsKey(transaction.getParentId())) {
             throw new IllegalArgumentException(String.format("No parent transaction found with id=%s", transaction.getParentId()));
         }

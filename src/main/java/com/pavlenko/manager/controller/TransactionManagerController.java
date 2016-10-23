@@ -1,5 +1,6 @@
 package com.pavlenko.manager.controller;
 
+import com.pavlenko.manager.model.TotalAmount;
 import com.pavlenko.manager.model.Transaction;
 import com.pavlenko.manager.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,9 @@ public class TransactionManagerController {
     private TransactionService transactionService;
 
     @RequestMapping(value = "/transaction/{transaction_id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> putNewTransaction(@PathVariable("transaction_id") long transactionId, @RequestBody Transaction transaction) {
+    public ResponseEntity<Void> createOrReplaceTransaction(@PathVariable("transaction_id") long transactionId, @RequestBody Transaction transaction) {
         try {
-            transactionService.createTransaction(transactionId, transaction);
+            transactionService.createOrReplaceTransaction(transactionId, transaction);
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
         }
@@ -50,15 +51,15 @@ public class TransactionManagerController {
     }
 
     @RequestMapping(value = "/sum/{transaction_id}", method = RequestMethod.GET)
-    public ResponseEntity<String> getTransactionsSum(@PathVariable("transaction_id") Long transactionId) {
+    public ResponseEntity<TotalAmount> getTransactionsSum(@PathVariable("transaction_id") Long transactionId) {
         double sum;
         try {
             sum = transactionService.getTransactionSumById(transactionId);
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<TotalAmount>(HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<String>(String.format("{\"sum\",%s}", sum), HttpStatus.OK);
+        return new ResponseEntity<TotalAmount>(new TotalAmount(sum), HttpStatus.OK);
     }
 
 
