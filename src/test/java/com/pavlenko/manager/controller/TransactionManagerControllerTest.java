@@ -22,11 +22,13 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * RESTful unit tests
+ * <p>
+ * This tests works only if server with application is up and running
  *
  * @author sergii.pavlenko
  * @since Oct 22, 2016
  */
-@Ignore
+@Ignore("Remove ignorance when server with application up and running")
 public class TransactionManagerControllerTest {
     private static RequestSpecification spec;
 

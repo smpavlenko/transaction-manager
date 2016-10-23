@@ -5,7 +5,11 @@ The transactions to be stored have a type and an amount. The service supports re
 
 Project is compilable with Java 1.7 or later.
 
-The result 'target/RESTfulTransactionManager.war' file is deployable on application server(tested on Apache Tomcat 9.0.0.M10).
+To build project checkout and run `mvn clean install` in root folder
+
+The result `target/RESTfulTransactionManager.war` file is deployable on application server(tested on Apache Tomcat 9.0.0.M10).
+
+`TransactionManagerControllerTest` acceptance test is ignored because initially application is not yet deployed. To run those tests - build and deploy application on local application server and then remove `@Ignore` annotation from the test.
 
 
 ### The api spec looks like the following:
