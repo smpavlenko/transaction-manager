@@ -34,7 +34,7 @@ public class TransactionManagerController {
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/transaction/{transaction_id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/transaction/{transaction_id}", method = RequestMethod.GET)
     public ResponseEntity<Transaction> getTransaction(@PathVariable("transaction_id") long transactionId) {
         Transaction transaction = transactionService.getTransactionById(transactionId);
         if (transaction == null) {
